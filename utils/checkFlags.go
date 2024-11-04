@@ -3,39 +3,39 @@ package utils
 import "strings"
 
 func checkFlags(arg string, flags *Flags, lenArgs int) {
-	flags.flag = false
+	flags.Flag = false
 
-	// output flag
+	// output Flag
 	if strings.HasPrefix(arg, "--output=") {
-		flags.flag = true
-		flags.outputFile = arg[9:]
-		if !strings.HasSuffix(arg, ".txt") || flags.outputFile == ".txt" {
+		flags.Flag = true
+		flags.OutputFile = arg[9:]
+		if !strings.HasSuffix(arg, ".txt") || flags.OutputFile == ".txt" {
 			PrintError("output")
 		}
 	}
 
-	// Align flag
+	// Align Flag
 	if strings.HasPrefix(arg, "--align=") {
-		flags.flag = true
-		flags.alignOption = arg[8:]
+		flags.Flag = true
+		flags.AlignOption = arg[8:]
 		option := []string{"center", "right", "left", "justify"}
-		if !contains(flags.alignOption, option) {
+		if !contains(flags.AlignOption, option) {
 			PrintError("justify")
 		}
 	}
 
-	// color flag
+	// color Flag
 	if strings.HasPrefix(arg, "--color=") {
-		flags.flag = true
-		flags.color = arg[8:]
+		flags.Flag = true
+		flags.Color = arg[8:]
 		colors := []string{"white", "black", "red", "pink", "blue", "green", "brown", "orange", "yellow", "purple"}
-		if !contains(flags.color, colors) {
+		if !contains(flags.Color, colors) {
 			PrintError("color")
 		}
 	}
 
 	// check if there is an conflict
-	if (lenArgs == 5 && flags.color == "") || (lenArgs == 2 && flags.flag) || (lenArgs == 4 && !flags.flag) {
+	if (lenArgs == 5 && flags.Color == "") || (lenArgs == 2 && flags.Flag) || (lenArgs == 4 && !flags.Flag) {
 		PrintError("color")
 	}
 }

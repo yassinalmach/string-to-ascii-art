@@ -6,13 +6,13 @@ import (
 )
 
 type Flags struct {
-	str         string
-	bannerFile  string
-	flag        bool
-	outputFile  string
-	color       string
-	coloredStr  string
-	alignOption string
+	Str         string
+	BannerFile  string
+	Flag        bool
+	OutputFile  string
+	Color       string
+	ColoredStr  string
+	AlignOption string
 }
 
 func CheckArgs(args []string) (Flags) {
@@ -27,34 +27,34 @@ func CheckArgs(args []string) (Flags) {
 
 	// pick banner file and letters to be colored
 	if len(args) == 5 {
-		flags.bannerFile = banner(args[4])
-		flags.coloredStr = args[2]
-	} else if len(args) == 4 && flags.color != "" {
+		flags.BannerFile = banner(args[4])
+		flags.ColoredStr = args[2]
+	} else if len(args) == 4 && flags.Color != "" {
 		if args[3] == "standard" || args[3] == "shadow" || args[3] == "thinkertoy" {
-			flags.bannerFile = banner(args[3])
+			flags.BannerFile = banner(args[3])
 		} else {
-			flags.bannerFile = banner("standard")
-			flags.coloredStr = args[2]
+			flags.BannerFile = banner("standard")
+			flags.ColoredStr = args[2]
 		}
 	} else if len(args) == 4 {
-		flags.bannerFile = banner(args[3])
-	} else if len(args) == 3 && !flags.flag {
-		flags.bannerFile = banner(args[2])
+		flags.BannerFile = banner(args[3])
+	} else if len(args) == 3 && !flags.Flag {
+		flags.BannerFile = banner(args[2])
 	} else {
-		flags.bannerFile = banner("standard")
+		flags.BannerFile = banner("standard")
 	}
 
 	// pick string position
-	if flags.coloredStr != "" {
-		flags.str = args[3]
-	} else if flags.flag {
-		flags.str = args[2]
+	if flags.ColoredStr != "" {
+		flags.Str = args[3]
+	} else if flags.Flag {
+		flags.Str = args[2]
 	} else {
-		flags.str = args[1]
+		flags.Str = args[1]
 	}
 
 	// Empty String
-	if flags.str == "" {
+	if flags.Str == "" {
 		os.Exit(0)
 	}
 	return flags
