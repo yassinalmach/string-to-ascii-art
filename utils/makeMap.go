@@ -12,7 +12,8 @@ func MakeMap(bannerFile string) (map[rune][]string, error) {
 		return nil, err
 	}
 
-	fileContent := strings.Split(string(file), "\r\n")
+	file = cleaner(file)
+	fileContent := strings.Split(string(file), "\n")
 	asciiMap := make(map[rune][]string)
 	
 	dec := 31
@@ -24,4 +25,14 @@ func MakeMap(bannerFile string) (map[rune][]string, error) {
 		}
 	}
 	return asciiMap, nil
+}
+
+func cleaner(file []byte) []byte {
+    res := []byte{}
+    for _, byt := range file {
+        if byt != '\r' {
+            res = append(res, byt)
+        }
+    }
+    return res
 }
