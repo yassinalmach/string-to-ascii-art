@@ -1,6 +1,11 @@
 package utils
 
-import "strings"
+import (
+	"log"
+	"regexp"
+	"strconv"
+	"strings"
+)
 
 func checkFlags(arg string, flags *Flags, lenArgs int) {
 	flags.Flag = false
@@ -28,11 +33,37 @@ func checkFlags(arg string, flags *Flags, lenArgs int) {
 	if strings.HasPrefix(arg, "--color=") {
 		flags.Flag = true
 		flags.Color = arg[8:]
-		colors := []string{"white", "black", "red", "pink", "blue", "green", "brown", "orange", "yellow", "purple"}
-		if !contains(flags.Color, colors) {
-			PrintError("color")
+		reg := regexp.MustCompile(`^rgb\((\d+),\s?(\d+),\s?(\d+)\)$`)
+		if reg.MatchString(flags.Color) {
+			flags.RgbColor = true
+			submatched := reg.FindStringSubmatch(flags.Color)
+			for i := 1; i < len(submatched); i++ {
+				nbr, err := strconv.Atoi(submatched[i])
+				if err != nil {
+					log.Fatalln("Error converting RGB number")
+				}
+				if nbr > 255 || nbr < 0 {
+					log.Fatalln("error RGB number is incorrect")
+				}
+			}
+			flags.RGB.R = submatched[1]
+			flags.RGB.G = submatched[2]
+			flags.RGB.B = submatched[3]
+		} else {
+			colors := []string{"white", "black", "red", "pink", "blue", "green", "brown", "orange", "yellow", "purple"}
+			if !contains(flags.Color, colors) {
+				PrintError("color")
+			}
 		}
 	}
+
+	// reverse flag
+	if strings.HasPrefix(arg, "--reverse=") {
+        flags.ReverseFile = arg[10:]
+        if !strings.HasSuffix(flags.ReverseFile, ".txt") || flags.ReverseFile == ".txt" {
+            PrintError("reverse")
+        }
+    }
 
 	// check if there is an conflict
 	if (lenArgs == 5 && flags.Color == "") || (lenArgs == 2 && flags.Flag) || (lenArgs == 4 && !flags.Flag) {

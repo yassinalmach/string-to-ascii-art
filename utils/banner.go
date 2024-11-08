@@ -4,11 +4,11 @@ func banner(fileName string) string {
 	var file string
 	switch fileName {
 	case "standard":
-		file = "Banners/standard.txt"
+		file = "banners/standard.txt"
 	case "shadow":
-		file = "Banners/shadow.txt"
+		file = "banners/shadow.txt"
 	case "thinkertoy":
-		file = "Banners/thinkertoy.txt"
+		file = "banners/thinkertoy.txt"
 	default:
 		PrintError("banner")
 	}

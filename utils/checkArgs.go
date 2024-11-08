@@ -10,17 +10,25 @@ type Flags struct {
 	BannerFile  string
 	Flag        bool
 	OutputFile  string
+	ReverseFile string
+	AlignOption string
 	Color       string
 	ColoredStr  string
-	AlignOption string
+	RgbColor    bool
+	RGB         struct {
+		R string
+		G string
+		B string
+	}
 }
 
-func CheckArgs(args []string) (Flags) {
+func CheckArgs(args []string) Flags {
 	var flags Flags
+	// check args if valid
 	if len(args) < 2 || len(args) > 5 {
-		PrintError("color")
+		PrintError("reverse")
 	} else if len(args) == 2 && strings.HasPrefix(args[1], "--help") {
-		PrintError("color")
+		PrintError("reverse")
 	} else {
 		checkFlags(args[1], &flags, len(args))
 	}
