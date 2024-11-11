@@ -29,7 +29,7 @@ func CheckArgs(args []string) Flags {
 	if len(args) < 2 || len(args) > 5 {
 		PrintError("reverse")
 	} else if len(args) == 2 && strings.HasPrefix(args[1], "--help") {
-		PrintError("reverse")
+		helpFunc()
 	} else {
 		checkFlags(args[1], &flags, len(args))
 	}
