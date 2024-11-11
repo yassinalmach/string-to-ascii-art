@@ -28,6 +28,10 @@ func reverse(inputFile []string, asciiMap map[rune][]string) (string, error) {
 			i += 7
 			result += "\n"
 		}
+		if inputFile[i] != "" {
+			return "", fmt.Errorf("file format incorrect")
+		}
+		
 	}
 	return result[:len(result)-1], nil
 }
