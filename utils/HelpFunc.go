@@ -21,7 +21,7 @@ Color Flag:
 	- To color a specific charactes of the text, use the following syntax:
 		go run . --color=<color> <letters to be colored> "your text here"
 	- you can input RGB number to color a string
-		go run . --color=rgb{<R>,<G>,<B>} <letters to be colored> "your text here"
+		go run . --color=rgb(<R>,<G>,<B>) <letters to be colored> "your text here"
 		instead of R, G, B use numbers between 0 and 255
 
 Banners:
@@ -31,7 +31,7 @@ Examples:
 	go run . --output=output.txt "Hello, World!" standard
 	go run . --align=center "Hello" shadow
 	go run . --color=red He "Hello, World!"
-	go run . --color=rbg{255,255,0} He "Hello, World!"
+	go run . "--color=rbg(255,255,0)" He "Hello, World!"
 	go run . --reverse=output.txt`
 	fmt.Println(helpMessage)
 	os.Exit(0)

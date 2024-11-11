@@ -14,7 +14,7 @@ type Flags struct {
 	AlignOption string
 	Color       string
 	ColoredStr  string
-	RgbColor    bool
+	RgbFlag     bool
 	RGB         struct {
 		R string
 		G string

@@ -36,7 +36,7 @@ func checkFlags(arg string, flags *Flags, lenArgs int) {
 		flags.Color = arg[8:]
 		reg := regexp.MustCompile(`^rgb\((\d+),\s?(\d+),\s?(\d+)\)$`)
 		if reg.MatchString(flags.Color) {
-			flags.RgbColor = true
+			flags.RgbFlag = true
 			submatched := reg.FindStringSubmatch(flags.Color)
 			for i := 1; i < len(submatched); i++ {
 				nbr, err := strconv.Atoi(submatched[i])
