@@ -5,6 +5,7 @@ import (
 	"os"
 )
 
+// PrintError prints the errors
 func PrintError(err string) {
 	switch err {
 	case "color":

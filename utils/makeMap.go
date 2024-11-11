@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// make MAP, to store every ascii art character (8 lines) with their decimal ascii number
+// makeMap, to store every ascii art character (8 lines) with their decimal ascii number
 func MakeMap(bannerFile string) (map[rune][]string, error) {
 	file, err := os.ReadFile(bannerFile)
 	if err != nil {
