@@ -22,6 +22,7 @@ type Flags struct {
 	}
 }
 
+// CheckArgs checks if the arguments that user gives are correct
 func CheckArgs(args []string) Flags {
 	var flags Flags
 	// check args if valid

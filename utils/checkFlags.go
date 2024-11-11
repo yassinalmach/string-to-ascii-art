@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// checkFlags checks if there is a valid flag in the first argument
 func checkFlags(arg string, flags *Flags, lenArgs int) {
 	flags.Flag = false
 
@@ -40,7 +41,7 @@ func checkFlags(arg string, flags *Flags, lenArgs int) {
 			for i := 1; i < len(submatched); i++ {
 				nbr, err := strconv.Atoi(submatched[i])
 				if err != nil {
-					log.Fatalln("Error converting RGB number")
+					log.Fatalln("error converting RGB number")
 				}
 				if nbr > 255 || nbr < 0 {
 					log.Fatalln("error RGB number is incorrect")
@@ -65,7 +66,7 @@ func checkFlags(arg string, flags *Flags, lenArgs int) {
         }
     }
 
-	// check if there is an conflict
+	// check if there is an conflict between args
 	if (lenArgs == 5 && flags.Color == "") || (lenArgs == 2 && flags.Flag) || (lenArgs == 4 && !flags.Flag) {
 		PrintError("color")
 	}
