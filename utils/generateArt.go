@@ -27,7 +27,7 @@ func GenerateArt(asciiMap map[rune][]string, splittedStr []string, flags Flags) 
 				asciiArt = append(asciiArt, indice)
 				numSpace++
 			} else if flags.Color != "" {
-				coloredArt := colorize(asciiMap[char], line, flags.Color, flags.ColoredStr, index)
+				coloredArt := colorize(asciiMap[char], line, flags, index)
 				asciiArt = append(asciiArt, coloredArt)
 			} else {
 				asciiArt = append(asciiArt, asciiMap[char])
@@ -49,7 +49,6 @@ func GenerateArt(asciiMap map[rune][]string, splittedStr []string, flags Flags) 
 			}
 			result += "\n"
 		}
-
 		numSpace = 0
 		artLength = 0
 	}
