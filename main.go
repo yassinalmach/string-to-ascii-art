@@ -1,7 +1,9 @@
 package main
 
 import (
+	"AsciiArt/reverse"
 	"AsciiArt/utils"
+	"fmt"
 	"log"
 	"os"
 )
@@ -9,6 +11,17 @@ import (
 func main() {
 	flags := utils.CheckArgs(os.Args)
 
+	// check reverse flag
+	if flags.ReverseFile != "" {
+		result, err := reverse.ReverseAscii(flags)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		
+		fmt.Println(result)
+		return
+	}
+	
 	asciiMap, err := utils.MakeMap(flags.BannerFile)
 	if err != nil {
 		utils.PrintError("banner")
