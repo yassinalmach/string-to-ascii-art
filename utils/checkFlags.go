@@ -59,12 +59,16 @@ func checkFlags(arg string, flags *Flags, lenArgs int) {
 	}
 
 	// reverse flag
-	if strings.HasPrefix(arg, "--reverse=") {
-        flags.ReverseFile = arg[10:]
-        if !strings.HasSuffix(flags.ReverseFile, ".txt") || flags.ReverseFile == ".txt" {
-            PrintError("reverse")
-        }
-    }
+	if strings.HasPrefix(arg, "--reverse") {
+		if strings.HasPrefix(arg, "--reverse=") {
+			flags.ReverseFile = arg[10:]
+			if !strings.HasSuffix(flags.ReverseFile, ".txt") || flags.ReverseFile == ".txt" {
+				PrintError("reverse")
+			}
+		} else {
+			PrintError("reverse")
+		}
+	}
 
 	// check if there is an conflict between args
 	if (lenArgs == 5 && flags.Color == "") || (lenArgs == 2 && flags.Flag) || (lenArgs == 4 && !flags.Flag) {
