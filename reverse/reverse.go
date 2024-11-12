@@ -7,11 +7,13 @@ import "fmt"
 func reverse(inputFile []string, asciiMap map[rune][]string) (string, error) {
 	var result string
 	for i := 0; i < len(inputFile); i++ {
+		// empty line, add new line to the result
 		if (inputFile[i] == "" || inputFile[i] == "$") && i != len(inputFile)-1 {
 			result += "\n"
 			continue
 		}
 
+		// there is a potential ascii art
 		if len(inputFile[i:]) >= 8 {
 			for char := ' '; char <= '~'; char++ {
 				charWidth := len(asciiMap[char][0])
@@ -21,24 +23,24 @@ func reverse(inputFile []string, asciiMap map[rune][]string) (string, error) {
 					char = 31
 				}
 			}
-			if isNotValidFormat(inputFile[i:]) {
-				return "", fmt.Errorf("file format incorrect")
+			if invalidFormat(inputFile[i:]) {
+				return "", fmt.Errorf("invalid format")
 			}
 
 			i += 7
 			result += "\n"
 		}
-		if inputFile[i] != "" {
-			return "", fmt.Errorf("file format incorrect")
+
+		if inputFile[i] != "" && inputFile[i] != "$" {
+			return "", fmt.Errorf("invalid format")
 		}
-		
 	}
 	return result[:len(result)-1], nil
 }
 
 // isNotValidFormat checks input file format if it is correct
 // it returns true if not correct, otherwise it retuns false
-func isNotValidFormat(inputFile []string) bool {
+func invalidFormat(inputFile []string) bool {
 	for i := 0; i < 8; i++ {
 		if inputFile[i] != "" && inputFile[i] != "$" {
 			return true

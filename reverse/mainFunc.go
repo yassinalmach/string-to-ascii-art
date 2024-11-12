@@ -2,6 +2,7 @@ package reverse
 
 import (
 	"AsciiArt/utils"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -16,12 +17,16 @@ func ReverseAscii(flags utils.Flags) (string, error) {
 		return "", err
 	}
 
-	// split the revese file
-	inputFile := strings.Split(string(fileContent), "\n")
+	if string(fileContent) == "" {
+		return "", fmt.Errorf("empty file")
+	}
 
 	// pick the right banner
 	flags.BannerFile = pickBanner(string(fileContent))
-
+	
+	// split the revese file
+	inputFile := strings.Split(string(fileContent), "\n")
+	
 	asciiMap, err := utils.MakeMap(flags.BannerFile)
 	if err != nil {
 		utils.PrintError("banner")

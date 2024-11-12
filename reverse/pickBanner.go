@@ -9,7 +9,6 @@ func pickBanner(file string) string {
 	} else if containsOnly(file) {
 		return "banners/shadow.txt"
 	}
-
 	return "banners/standard.txt"
 }
 
@@ -17,7 +16,7 @@ func pickBanner(file string) string {
 func containsOnly(file string) bool {
 	for i := 0; i < len(file); i++ {
 		if file[i] != ' ' && file[i] != '\n' {
-			if file[i:i+2] != "_|" && file[i-1:i+1] != "_|" {
+			if i != 0 && i < len(file)-1 && file[i:i+2] != "_|" && file[i-1:i+1] != "_|" {
 				return false
 			}
 		}
