@@ -2,7 +2,6 @@ package utils
 
 import (
 	"os"
-	"strings"
 )
 
 type Flags struct {
@@ -28,7 +27,7 @@ func CheckArgs(args []string) Flags {
 	// check args if valid
 	if len(args) < 2 || len(args) > 5 {
 		PrintError("reverse")
-	} else if len(args) == 2 && strings.HasPrefix(args[1], "--help") {
+	} else if len(args) == 2 && args[1] == "--help" {
 		helpFunc()
 	} else {
 		checkFlags(args[1], &flags, len(args))
